@@ -1,0 +1,13 @@
+#python stuff
+venv/
+__pycache__/
+
+.env
+
+#ide stuff
+.vscode
+.idea
+
+#databases stuff
+*.db
+*.sqlite3
