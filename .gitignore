@@ -11,3 +11,7 @@ __pycache__/
 #databases stuff
 *.db
 *.sqlite3
+
+# other_stuff
+simple_trainers/
+*.log
