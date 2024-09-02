@@ -8,9 +8,9 @@ async def orm_add_product(session: AsyncSession, data: dict):
     obj = Wine(
         title=data["title"],
         description=data["description"],
-        rating=float(data["rating"]),
+        rating=int(data["rating"]),
         image=data["image"],
-        category=int(data["category"]),
+        #category=int(data["category"]),
     )
     session.add(obj)
     await session.commit()

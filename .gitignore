@@ -15,3 +15,4 @@ __pycache__/
 # other_stuff
 simple_trainers/
 *.log
+dev_plan.txt

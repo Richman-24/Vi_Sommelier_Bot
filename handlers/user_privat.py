@@ -4,6 +4,7 @@ from aiogram.filters import CommandStart, Command
 from keyboards.inline import get_callback_btns
 
 user_privat_router = Router()
+# user_privat_router.filter()  #### Добавить фильтр - только для only_family
 
 _choices = {
             "Красное":"red",

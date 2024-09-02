@@ -15,6 +15,9 @@ session_maker = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_c
 async def create_db():
     async with engine.begin() as conn:
         await conn.run_sync(BaseModel.metadata.create_all)
+    
+    #async with session_maker() as session: ...
+
 
 async def drop_db():
     async with engine.begin() as conn:

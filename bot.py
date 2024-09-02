@@ -10,14 +10,16 @@ from logging.handlers import RotatingFileHandler
 from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
-from database.engine import create_db
+from common.bot_command_list import private
+from database.engine import create_db, session_maker
 from handlers.user_privat import user_privat_router
 from handlers.admin_privat import admin_privat_router
-from common.bot_command_list import private
-
+from middlewares.db_middle import DataBaseSession
 
 bot = Bot(token=os.getenv('TOKEN'))
 dp = Dispatcher()
+
+admin_privat_router.message.middleware(DataBaseSession(session_pool=session_maker))
 
 dp.include_router(user_privat_router)
 dp.include_router(admin_privat_router)
