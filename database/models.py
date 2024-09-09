@@ -16,7 +16,6 @@ class CategoryWine(BaseModel):
 
     title: Mapped[str_150]
 
-
 class Wine(BaseModel):
     __tablename__ = 'wine'
 
@@ -24,13 +23,23 @@ class Wine(BaseModel):
     description: Mapped[str] = mapped_column(Text)
     image: Mapped[str_150] #пока что будем хранить ссылку на изображение в базе ТГ, а там придумаем. 
     rating: Mapped[int] = mapped_column(SmallInteger)
+    category_id: Mapped[int] = mapped_column(ForeignKey('category_wine.id', ondelete='CASCADE'), nullable=False)
+
     category: Mapped['CategoryWine'] = relationship(backref='wine')
 
-# class Bear(BaseModel):
-#     __tablename__ = 'bear'
 
-#     title: Mapped[str_150]
-#     description: Mapped[str] = mapped_column(Text)
-#     image: Mapped[str_150] #пока что будем хранить ссылку на изображение в базе ТГ, а там придумаем. 
-#     rating: Mapped[int] = mapped_column(SmallInteger)
-#     category: Mapped['CategoryWine'] = relationship(backref='wine')
+class CategoryBear(BaseModel):
+    __tablename__ = 'category_bear'
+
+    title: Mapped[str_150]
+
+class Bear(BaseModel):
+    __tablename__ = 'bear'
+
+    title: Mapped[str_150]
+    description: Mapped[str] = mapped_column(Text)
+    image: Mapped[str_150] #пока что будем хранить ссылку на изображение в базе ТГ, а там придумаем. 
+    rating: Mapped[int] = mapped_column(SmallInteger)
+    category_id: Mapped[int] = mapped_column(ForeignKey('category_bear.id', ondelete='CASCADE'), nullable=False)
+    
+    category: Mapped['CategoryBear'] = relationship(backref='bear')

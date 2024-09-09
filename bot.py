@@ -19,8 +19,6 @@ from middlewares.db_middle import DataBaseSession
 bot = Bot(token=os.getenv('TOKEN'))
 dp = Dispatcher()
 
-admin_privat_router.message.middleware(DataBaseSession(session_pool=session_maker))
-
 dp.include_router(user_privat_router)
 dp.include_router(admin_privat_router)
 
@@ -34,6 +32,8 @@ async def on_shutdown():
 async def run_bot():
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
+
+    dp.update.middleware(DataBaseSession(session_pool=session_maker))
     
     await bot(DeleteWebhook(drop_pending_updates=True))
     await bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
